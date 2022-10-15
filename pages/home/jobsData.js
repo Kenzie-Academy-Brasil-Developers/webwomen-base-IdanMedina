@@ -27,3 +27,6 @@ const jobsData = [
     modalities: ["Home Office", "Presencial"],
   },
 ];
+ 
+
+ /* const dataJob = localStorage.getItem("job-data"); */

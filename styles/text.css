@@ -1,0 +1,110 @@
+h1 { 
+    position: absolute;
+    color: var(--color-grey-6);
+    font-size: var(--title-3);
+    top: 158px;
+    left: 100px;
+}
+
+ h2 {
+    position: absolute;
+    color: var(--color-grey-3);
+    font-size: var(--title-1);
+    top: 242.47px;
+    left: 100px;
+ }
+
+h3 {
+    color: var(--color-grey-1);
+    font-size: var(--title-4); 
+ }
+ 
+.container h3 {
+    margin-top: 50px;
+    margin-bottom: 54px;
+    margin-left: 100px;
+ }
+  
+ .sel-vacancy h3{
+    margin-top: 2rem;
+    margin-left: 2rem;
+  }
+
+ header p {
+    position: absolute;
+    color: var(--color-grey-5);
+    font-size: var(--text-1);
+    line-height: 2rem;
+    top: 346.47px;
+    left: 100px;
+    margin-right: 40%;
+ }
+  header b {
+    position: absolute;
+    color: var(--color-grey-5);
+    font-size: var(--text-1);
+    line-height: 2rem;
+    top: 446.47px;
+    left: 100px;
+  }
+
+  .card-job h3{
+   margin: 38px 0px 18px 38px
+  }
+
+   .where{
+      margin-left: 38px;
+      color: var(--color-grey-2);
+      font-size: var(--text-3);
+      display: flex;
+      gap: 32px;
+   }
+   .description {
+      margin-top: 28px;;
+      margin-left: 38px;
+      color: var(--color-grey-2);
+      font-size: var(--text-3);
+      line-height: 32px;
+   }
+  @media(max-width: 991px){
+    h1 { 
+        font-size: 2rem;
+        left: 16px;
+    }
+
+     h2 {  
+        left: 16px;
+     }
+
+    h3 {
+        color: var(--color-grey-1);
+        font-size: var(--title-4); 
+     }
+
+    .container h3 {
+        margin-left: 0px;
+     }
+
+     .sel-vacancy h3{
+        margin-left: 2rem;
+      }
+
+     header p {
+      position: relative;
+        left: 16px;
+        margin-right: -100vw;
+     }
+
+      header b {
+        left: 16px;
+      }
+      .card-job h3{
+         margin: 0 auto;
+        }
+        .where{
+         margin: 18px 0 28px 0;
+        }
+        .description{
+         margin: 0 auto;
+        }
+}
