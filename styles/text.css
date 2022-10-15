@@ -66,6 +66,14 @@ h3 {
       font-size: var(--text-3);
       line-height: 32px;
    }
+   .not-yet {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5rem;
+      color:var(--color-grey-2);
+      font-size: var(--text-2);
+   }
   @media(max-width: 991px){
     h1 { 
         font-size: 2rem;

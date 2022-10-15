@@ -10,6 +10,15 @@ let item = {
 };
 let selectJob = [];
 
+/* function notYet(){
+if(selectJob.length === 0){
+    const p = document.createElement("p")
+    p.classList.add("not-yet")
+    p.innerText = "Você ainda não aplicou para nenhuma vaga"
+    listSetJob.appendChild(p)
+}
+} */
+/* notYet() */
 function renderJob(job) {
   const li = document.createElement("li");
   const title = document.createElement("h3");
@@ -43,26 +52,32 @@ function renderJob(job) {
 
   button.addEventListener("click", (e) => {
     const id = e.target.id;
-    let pushItem = {...item};
+    let pushItem = { ...item };
     const find = selectJob.find((element) => element.id == id);
-    
+
     if (typeof find === "undefined") {
-        pushItem.id = id;
-        pushItem.title = job.title;
-        pushItem.enterprise = job.enterprise;
-        pushItem.location = job.location;
-        pushItem.descrition = job.descrition;
-        job.modalities.forEach((elem) => {
-            pushItem.modalities.push(elem)
-          });
-        selectJob.push(pushItem)
+      pushItem.id = id;
+      pushItem.title = job.title;
+      pushItem.enterprise = job.enterprise;
+      pushItem.location = job.location;
+      pushItem.descrition = job.descrition;
+      job.modalities.forEach((elem) => {
+        pushItem.modalities.push(elem);
+      });
+      selectJob.push(pushItem);
       localStorage.setItem(`job-data ${id}`, JSON.stringify(pushItem));
       button.innerText = "Remover candidatura";
+      renderSelJob(job);
+      /* notYet() */
     }
     if (typeof find !== "undefined") {
-      selectJob.splice(find.id, 1);
+      listSetJob.innerHTML = "";
+      const findIndex = selectJob.findIndex((element) => element.id === id);
+      selectJob.splice(findIndex, 1);
       localStorage.removeItem(`job-data ${id}`);
       button.innerText = "Candidatar";
+      selectJob.map((job) => renderSelJob(job));
+      /* notYet() */
     }
   });
 
@@ -85,12 +100,28 @@ function renderSelJob(seljob) {
   li.classList.add("card-seljob");
   where.classList.add("where");
 
+  li.id = seljob.id;
   title.innerText = seljob.title;
   enterprise.innerText = seljob.enterprise;
   location.innerText = seljob.location;
   trash.id = seljob.id;
   trash.src = "../assets/img/trash.png";
-  trash.addEventListener("click", () => {});
+  trash.addEventListener("click", (e) => {
+    listSetJob.innerHTML = "";
+    const id = e.target.id;
+    const submitBtn = document.querySelectorAll(".submit-btn");
+    const findIndex = selectJob.find((element) => element.id === id);
+    selectJob.splice(findIndex, 1);
+    localStorage.removeItem(`job-data ${id}`);
+    for (let i = 0; i < submitBtn.length; i++) {
+      if (submitBtn[i].id === id) {
+        submitBtn[i].innerText = "Candidatar";
+      }
+    }
+    selectJob.map((job) => renderSelJob(job));
+    /* notYet() */
+  }
+  );
 
   where.append(enterprise, location);
   firstBox.append(title, where);
@@ -99,7 +130,5 @@ function renderSelJob(seljob) {
   listSetJob.appendChild(li);
 }
 
-console.log(selectJob);
-
-jobsData.forEach((job) => renderJob(job));
-selectJob.forEach((seljob) => renderSelJob(seljob));
+jobsData.map((job) => renderJob(job));
+selectJob.map((job) => renderJob(job));
