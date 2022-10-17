@@ -25,6 +25,22 @@ header a {
   border: 2px solid var(--color-brand-1);
   cursor:pointer
 }
+
+.trash-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 26px;
+ width: 44px;
+  height: 38px; 
+  background-color: var(--color-grey-5);
+  gap: 20px;
+  border-bottom: 2px solid var(--color-grey-5);
+  border-radius: 0.5rem;
+}
+.trash{
+  cursor: pointer;
+}
 @media(max-width: 991px){
     .submit-btn {
       margin: 0 auto;

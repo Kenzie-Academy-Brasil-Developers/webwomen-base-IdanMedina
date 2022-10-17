@@ -10,15 +10,19 @@ let item = {
 };
 let selectJob = [];
 
-/* function notYet(){
+function notYet(){
 if(selectJob.length === 0){
     const p = document.createElement("p")
     p.classList.add("not-yet")
     p.innerText = "Você ainda não aplicou para nenhuma vaga"
-    listSetJob.appendChild(p)
+    return listSetJob.appendChild(p)
+} 
+else {
+  const p = document.querySelector(".not-yet");
+  return listSetJob.removeChild(p)
 }
-} */
-/* notYet() */
+}
+notYet()
 function renderJob(job) {
   const li = document.createElement("li");
   const title = document.createElement("h3");
@@ -68,7 +72,7 @@ function renderJob(job) {
       localStorage.setItem(`job-data ${id}`, JSON.stringify(pushItem));
       button.innerText = "Remover candidatura";
       renderSelJob(job);
-      /* notYet() */
+      notYet()
     }
     if (typeof find !== "undefined") {
       listSetJob.innerHTML = "";
@@ -77,7 +81,7 @@ function renderJob(job) {
       localStorage.removeItem(`job-data ${id}`);
       button.innerText = "Candidatar";
       selectJob.map((job) => renderSelJob(job));
-      /* notYet() */
+      notYet()
     }
   });
 
@@ -99,6 +103,8 @@ function renderSelJob(seljob) {
 
   li.classList.add("card-seljob");
   where.classList.add("where");
+  trashBox.classList.add("trash-box");
+  trash.classList.add("trash");
 
   li.id = seljob.id;
   title.innerText = seljob.title;
@@ -119,7 +125,7 @@ function renderSelJob(seljob) {
       }
     }
     selectJob.map((job) => renderSelJob(job));
-    /* notYet() */
+    notYet()
   }
   );
 
