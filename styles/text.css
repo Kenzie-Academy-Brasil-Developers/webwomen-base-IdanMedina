@@ -56,12 +56,16 @@ h3 {
   }
 
    .where{
-      margin-top: 20px;
+      margin-left: 38px;
       color: var(--color-grey-2);
       font-size: var(--text-3);
       display: flex;
       justify-content: flex-start;
       gap: 32px;
+   }
+   .card-seljob .where {
+      margin-top: 20px;
+      margin-left: 0px;
    }
    .description {
       margin-top: 28px;;

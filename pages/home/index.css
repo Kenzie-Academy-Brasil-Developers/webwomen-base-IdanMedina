@@ -26,7 +26,6 @@ header {
   background-color: var(--color-grey-6);
   border-radius: 0.5rem;
 }
-
 .card-job {
   display: flex;
   flex-direction: column;
@@ -42,7 +41,7 @@ header {
   justify-content: space-between;
   padding: 32px 28px;
   width: 503px;
-  height: 160px;
+  min-height: 160px;
   background-color: var(--color-grey-6);
   border-bottom: 2px solid var(--color-grey-5);
 }
@@ -75,10 +74,8 @@ header {
     width: 991px;
   }
   .box-vacancy {
-    display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 78px;
+    gap: 36px
   }
   .sel-vacancy {
     width: 100%;
@@ -96,5 +93,9 @@ header {
     margin: 28px 0 32px 0;
     gap: 2rem;
     justify-content: flex-start;
+  }
+  .card-seljob{
+    width: 100%;
+    
   }
 }
