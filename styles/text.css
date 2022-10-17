@@ -86,9 +86,11 @@ h3 {
     h1 { 
         font-size: 2rem;
         left: 16px;
+        max-width: 100%;
     }
 
      h2 {  
+      max-width: 100%;
         left: 16px;
      }
 
@@ -100,19 +102,16 @@ h3 {
     .container h3 {
         margin-left: 0px;
      }
-
-     .sel-vacancy h3{
-        margin-left: 2rem;
-      }
-
      header p {
       position: relative;
+      max-width: 90%;
         left: 16px;
         margin-right: -100vw;
      }
 
       header b {
         left: 16px;
+        top: 500px;
       }
       .card-job h3{
          margin: 0 auto;
@@ -123,4 +122,11 @@ h3 {
         .description{
          margin: 0 auto;
         }
+        .not-yet {
+         /* display: flex;
+         align-items: center;
+         justify-content: center; */
+         margin: 0 auto;
+        
+      }
 }

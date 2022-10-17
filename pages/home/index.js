@@ -1,5 +1,7 @@
 const listJob = document.querySelector(".list-job");
 const listSetJob = document.querySelector(".list-setjob");
+
+
 let item = {
   id: 0,
   title: "",
@@ -11,19 +13,24 @@ let item = {
 let selectJob = [];
 
 function notYet(){
+  const p = document.createElement("p")
 if(selectJob.length === 0){
-    const p = document.createElement("p")
-    p.classList.add("not-yet")
+    p.classList.add("not-yet");
     p.innerText = "Você ainda não aplicou para nenhuma vaga"
     return listSetJob.appendChild(p)
 } 
-else {
-  const p = document.querySelector(".not-yet");
-  return listSetJob.removeChild(p)
 }
+
+
+function Yet(){
+  const p = document.querySelector(".not-yet")
+  if(p){
+    return listSetJob.removeChild(p)
+  }
 }
-notYet()
+
 function renderJob(job) {
+  const saveJob = localStorage.getItem("job-data");
   const li = document.createElement("li");
   const title = document.createElement("h3");
   const where = document.createElement("div");
@@ -54,34 +61,44 @@ function renderJob(job) {
   button.id = job.id;
   button.innerText = "Candidatar";
 
+  if(saveJob){
+    const iterate = JSON.parse(saveJob)
+    const findBtn = iterate.find(saved => saved.id === button.id) 
+    if(typeof findBtn !== "undefined"){
+      button.innerText = "Remover candidatura"}
+  }
+
   button.addEventListener("click", (e) => {
     const id = e.target.id;
-    let pushItem = { ...item };
+    
     const find = selectJob.find((element) => element.id == id);
 
     if (typeof find === "undefined") {
+      let pushItem = { ...item };
       pushItem.id = id;
       pushItem.title = job.title;
       pushItem.enterprise = job.enterprise;
       pushItem.location = job.location;
       pushItem.descrition = job.descrition;
+      pushItem.modalities = [];
       job.modalities.forEach((elem) => {
         pushItem.modalities.push(elem);
       });
       selectJob.push(pushItem);
-      localStorage.setItem(`job-data ${id}`, JSON.stringify(pushItem));
+      localStorage.setItem(`job-data`, JSON.stringify(selectJob));
       button.innerText = "Remover candidatura";
       renderSelJob(job);
-      notYet()
+      Yet()
     }
     if (typeof find !== "undefined") {
       listSetJob.innerHTML = "";
       const findIndex = selectJob.findIndex((element) => element.id === id);
       selectJob.splice(findIndex, 1);
-      localStorage.removeItem(`job-data ${id}`);
+      localStorage.setItem(`job-data`, JSON.stringify(selectJob));
       button.innerText = "Candidatar";
       selectJob.map((job) => renderSelJob(job));
       notYet()
+      deleteSave()
     }
   });
 
@@ -111,14 +128,14 @@ function renderSelJob(seljob) {
   enterprise.innerText = seljob.enterprise;
   location.innerText = seljob.location;
   trash.id = seljob.id;
-  trash.src = "../assets/img/trash.png";
+  trash.src = "./assets/img/trash.png";
   trash.addEventListener("click", (e) => {
     listSetJob.innerHTML = "";
     const id = e.target.id;
     const submitBtn = document.querySelectorAll(".submit-btn");
-    const findIndex = selectJob.find((element) => element.id === id);
+    const findIndex = selectJob.findIndex((element) => element.id === id);
     selectJob.splice(findIndex, 1);
-    localStorage.removeItem(`job-data ${id}`);
+    localStorage.setItem(`job-data`, JSON.stringify(selectJob));
     for (let i = 0; i < submitBtn.length; i++) {
       if (submitBtn[i].id === id) {
         submitBtn[i].innerText = "Candidatar";
@@ -126,6 +143,7 @@ function renderSelJob(seljob) {
     }
     selectJob.map((job) => renderSelJob(job));
     notYet()
+    deleteSave()
   }
   );
 
@@ -136,5 +154,26 @@ function renderSelJob(seljob) {
   listSetJob.appendChild(li);
 }
 
-jobsData.map((job) => renderJob(job));
-selectJob.map((job) => renderJob(job));
+
+function save(){
+  const saveJob = localStorage.getItem("job-data");
+  if(saveJob){
+    const iterate = JSON.parse(saveJob)
+    iterate.map((job) => selectJob.push(job))
+    jobsData.map((job) => renderJob(job));
+    } else {
+      jobsData.map((job) => renderJob(job));
+    }
+}
+
+function deleteSave(){
+  const saveJob = JSON.parse(localStorage.getItem("job-data"));
+if(saveJob.length === 0){
+localStorage.removeItem("job-data")
+}
+}
+
+
+save()
+selectJob.map((job) => renderSelJob(job));
+notYet()
